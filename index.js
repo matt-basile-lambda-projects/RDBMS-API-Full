@@ -2,12 +2,14 @@ const express = require("express")
 const helmet = require("helmet")
 const knex = require("knex")
 const knexConfig = require('./knexfile');
+const studentRouter =require('./routes/studentsRouter')
 
 const db = knex(knexConfig.development);
 
 const server = express();
 server.use(helmet())
 server.use(express.json());
+server.use('/students', studentRouter)
 
 // GET
 server.get('/cohorts', async (req, res) =>{
